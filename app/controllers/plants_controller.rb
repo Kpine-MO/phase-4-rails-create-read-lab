@@ -7,7 +7,11 @@ class PlantsController < ApplicationController
     
       def create
         plant = Plant.create(plants_params)
+        if plant
         render json: plant, only: [:id, :name, :image, :price], status: :created
+        else
+            render json: {error: 'Plant not created'}, status: :not_created
+        end
       end
     
       def show
